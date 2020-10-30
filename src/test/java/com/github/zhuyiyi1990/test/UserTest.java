@@ -49,14 +49,18 @@ public class UserTest {
     public void testFindAll() throws IOException {
         List<User> list = userDao.findAll();
         for (User user : list) {
+            System.out.println("每个用户信息:");
             System.out.println(user);
+            System.out.println("账号：" + user.getAccounts());
+            System.out.println("角色：" + user.getRoles());
         }
     }
 
     @Test
     public void testFindById() {
-        User user = userDao.findById(3);
-        System.out.println(user);
+        User user1 = userDao.findById(3);
+        User user2 = userDao.findById(3);
+        System.out.println(user1 == user2);
     }
 
     @Test

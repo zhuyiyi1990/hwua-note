@@ -9,18 +9,26 @@
         <result column="money" property="money"/>
         <!--一对一的关系映射:配置封装user的内容
           property:对应的属性,  javaType:属性对应的类型-->
-        <association property="user" javaType="user">
+        <!--<association property="user" javaType="user">
             <id column="id" property="id"/>
             <result column="username" property="username"/>
             <result column="birthday" property="birthday"/>
             <result column="sex" property="sex"/>
             <result column="address" property="address"/>
-        </association>
+        </association>-->
+        <association property="user" javaType="user" column="uid"
+                     select="com.github.zhuyiyi1990.dao.IUserDao.findById"/>
     </resultMap>
 
     <select id="findAll" resultMap="accountUserMap">
-        select a.id aid,a.uid,a.money,u.*
+        <!--select a.id aid,a.uid,a.money,u.*
         from account a,user u
-        where a.uid = u.id
+        where a.uid = u.id-->
+        select * from account
+    </select>
+
+    <!--通过用户id查找对应的账户-->
+    <select id="findByUid" parameterType="Integer" resultType="account">
+        select * from account where uid=#{uid}
     </select>
 </mapper>
