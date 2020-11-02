@@ -2,32 +2,38 @@ package com.github.zhuyiyi1990.dao.impl;
 
 import com.github.zhuyiyi1990.dao.IAccountDao;
 import com.github.zhuyiyi1990.pojo.Account;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public class AccountDaoImpl extends JdbcDaoSupport implements IAccountDao {
+@Repository("accountDao")
+public class AccountDaoImpl implements IAccountDao {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @Override
     public Account findAccountById(int id) {
-        List<Account> accounts = getJdbcTemplate().query("select * from account2 where id = ?", new BeanPropertyRowMapper<>(Account.class), id);
+        List<Account> accounts = jdbcTemplate.query("select * from account where id = ?", new BeanPropertyRowMapper<>(Account.class), id);
         return accounts.isEmpty() ? null : accounts.get(0);
     }
 
     @Override
     public Account findAccountByName(String name) {
-        List<Account> accounts = getJdbcTemplate().query("select * from account2 where name = ?", new BeanPropertyRowMapper<>(Account.class), name);
+        List<Account> accounts = jdbcTemplate.query("select * from account where name = ?", new BeanPropertyRowMapper<>(Account.class), name);
         if (accounts.isEmpty()) {
             return null;
         }
         if (accounts.size() > 1) {
-            throw new RuntimeException("结果集不惟一");
+            throw new RuntimeException("结果集不唯一");
         }
         return accounts.get(0);
     }
 
     @Override
     public int update(Account account) {
-        return getJdbcTemplate().update("update account2 set name = ?, money = ? where id = ?", account.getName(), account.getMoney(), account.getId());
+        return jdbcTemplate.update("update account set name = ?, money = ? where id = ?", account.getName(), account.getMoney(), account.getId());
     }
 }
