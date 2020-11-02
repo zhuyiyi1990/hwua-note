@@ -1,23 +1,33 @@
 package com.github.zhuyiyi1990.service.impl;
 
+import com.github.zhuyiyi1990.dao.IAccountDao;
+import com.github.zhuyiyi1990.pojo.Account;
 import com.github.zhuyiyi1990.service.IAccountService;
-import org.springframework.stereotype.Service;
 
-@Service("accountService")
 public class AccountServiceImpl implements IAccountService {
-    @Override
-    public void saveAccount() {
-        System.out.println("保存账户");
+    private IAccountDao accountDao;
+
+    public void setAccountDao(IAccountDao accountDao) {
+        this.accountDao = accountDao;
     }
 
     @Override
-    public void updateAccount(int i) {
-        System.out.println("更新账户");
+    public Account findAccountById(int id) {
+        return accountDao.findAccountById(id);
     }
 
     @Override
-    public int deleteAccount() {
-        System.out.println("删除账户");
-        return 0;
+    public int update(Account account) {
+        return accountDao.update(account);
+    }
+
+    @Override
+    public void transfer(String sourceName, String targetName, float money) {
+        Account sourceAccount = accountDao.findAccountByName(sourceName);
+        Account targetAccount = accountDao.findAccountByName(targetName);
+        sourceAccount.setMoney(sourceAccount.getMoney() - money);
+        targetAccount.setMoney(targetAccount.getMoney() + money);
+        accountDao.update(sourceAccount);
+        accountDao.update(targetAccount);
     }
 }
