@@ -5,8 +5,6 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <display-name>Archetype Created Web Application</display-name>
-
-    <!-- 配置 spring mvc 的核心控制器 -->
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -20,11 +18,11 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
-        <!--发任何请求，都会经过这个Servlet-->
+        <!--发送任何请求都经过这个Servlet-->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!--配置SpringMVC过滤器 解决post请求中文乱码的问题-->
+    <!--配置SpringMVC过滤器,解决post请求中文乱码的问题-->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -35,16 +33,6 @@
     </filter>
     <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <!--SpringMVC提供了过滤器来完成其它请求方式的功能-->
-    <filter>
-        <filter-name>hiddenHttpMethodFilter</filter-name>
-        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>hiddenHttpMethodFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>

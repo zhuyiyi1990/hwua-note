@@ -4,6 +4,7 @@
     <title>Title</title>
 </head>
 <body>
-    <h3>成功！</h3>
+    <h3>成功!</h3>
+    ${user.username}
 </body>
 </html>

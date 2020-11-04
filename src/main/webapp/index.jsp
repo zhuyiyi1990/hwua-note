@@ -2,12 +2,32 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script>
+            //页面加载,绑定单击事件
+            $(function () {
+                $("#btn").click(function () {
+                    $.ajax({
+                        url:"user/testResponseBody",
+                        contentType:"application/json;charset=utf-8",
+                        type:"post",
+                        data:'{"username":"tom","password":"111111","age":14}',
+                        dataType:"json",
+                        success:function (data) {
+                            alert(data);
+                            alert(data.password);
+                            alert(data.age);
+                        }
+                    });
+                });
+            });
+        </script>
 </head>
 <body>
-    <h3>入门程序</h3>
-    <a href="hello">入门程序</a><br/>
-    <a href="requestMapping.jsp">requestMapping.jsp</a><br/>
-    <a href="params.jsp">params.jsp</a><br/>
-    <a href="anno.jsp">anno.jsp</a><br/>
+<a href="user/testReturnString">testReturnString</a><br/>
+<a href="user/testVoid">testVoid</a><br/>
+<a href="user/testModelAndView">testModelAndView</a><br/>
+<a href="user/testForwardOrRedirect">testForwardOrRedirect</a><br/>
+<input type="button" id="btn" value="发送ajax请求"/>
 </body>
 </html>
