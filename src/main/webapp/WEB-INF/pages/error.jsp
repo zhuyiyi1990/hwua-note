@@ -4,8 +4,8 @@
     <title>Title</title>
 </head>
 <body>
-    <h3>成功!</h3>
-    ${user.username}
-    <%System.out.println("success.jsp执行了");%>
+<h3>失败!</h3>
+${errorMsg}
+<%System.out.println("error.jsp执行了");%>
 </body>
 </html>

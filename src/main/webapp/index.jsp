@@ -28,6 +28,11 @@
 <a href="user/testVoid">testVoid</a><br/>
 <a href="user/testModelAndView">testModelAndView</a><br/>
 <a href="user/testForwardOrRedirect">testForwardOrRedirect</a><br/>
-<input type="button" id="btn" value="发送ajax请求"/>
+<input type="button" id="btn" value="发送ajax请求"/><br/>
+<a href="fileupload.jsp">fileupload.jsp</a><br/>
+<h3>异常处理</h3>
+<a href="user/testException">异常处理</a>
+<h3>拦截器</h3>
+<a href="user/testInterceptor">拦截器</a>
 </body>
 </html>
