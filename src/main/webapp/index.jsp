@@ -2,37 +2,15 @@
 <html>
 <head>
     <title>Title</title>
-    <script src="js/jquery-1.12.4.min.js"></script>
-    <script>
-            //页面加载,绑定单击事件
-            $(function () {
-                $("#btn").click(function () {
-                    $.ajax({
-                        url:"user/testResponseBody",
-                        contentType:"application/json;charset=utf-8",
-                        type:"post",
-                        data:'{"username":"tom","password":"111111","age":14}',
-                        dataType:"json",
-                        success:function (data) {
-                            alert(data);
-                            alert(data.password);
-                            alert(data.age);
-                        }
-                    });
-                });
-            });
-        </script>
 </head>
 <body>
-<a href="user/testReturnString">testReturnString</a><br/>
-<a href="user/testVoid">testVoid</a><br/>
-<a href="user/testModelAndView">testModelAndView</a><br/>
-<a href="user/testForwardOrRedirect">testForwardOrRedirect</a><br/>
-<input type="button" id="btn" value="发送ajax请求"/><br/>
-<a href="fileupload.jsp">fileupload.jsp</a><br/>
-<h3>异常处理</h3>
-<a href="user/testException">异常处理</a>
-<h3>拦截器</h3>
-<a href="user/testInterceptor">拦截器</a>
+<a href="account/findAll">测试</a>
+<hr/>
+    <h3>测试保存</h3>
+    <form action="account/saveAccount" method="post">
+        姓名:<input type="text" name="name"/><br/>
+        金额:<input type="text" name="money"/><br/>
+        <input type="submit" value="提交"/>
+    </form>
 </body>
 </html>
