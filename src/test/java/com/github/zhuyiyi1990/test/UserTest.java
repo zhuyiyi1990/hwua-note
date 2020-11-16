@@ -1,6 +1,7 @@
 package com.github.zhuyiyi1990.test;
 
 import com.github.zhuyiyi1990.dao.IUserDao;
+import com.github.zhuyiyi1990.pojo.QueryVo;
 import com.github.zhuyiyi1990.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -12,6 +13,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 public class UserTest {
@@ -53,5 +55,59 @@ public class UserTest {
     public void testFindById() {
         User user = userDao.findById(3);
         System.out.println(user);
+    }
+
+    @Test
+    public void testSaveUser() {
+        User user = new User();
+        user.setUsername("bb");
+        user.setBirthday(new Date());
+        user.setSex("男");
+        user.setAddress("重庆");
+        int rows = userDao.saveUser(user);
+        System.out.println(rows);
+        System.out.println(user.getId());//保存到id属性中了
+    }
+
+    @Test
+    public void testUpdate() {
+        User user = new User();
+        user.setId(21);
+        user.setUsername("cc");
+        user.setAddress("深圳");
+        int rows = userDao.updateUser(user);
+        System.out.println(rows);
+    }
+
+    @Test
+    public void testDelete() {
+        int rows = userDao.deleteUser(21);
+        System.out.println(rows);
+    }
+
+    @Test
+    public void testFindByName() {
+        List<User> list = userDao.findByName("%小%");
+        for (User user : list) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
+    public void testFindTotal() {
+        int total = userDao.findTotal();
+        System.out.println(total);
+    }
+
+    @Test
+    public void testFindByQueryVo() {
+        QueryVo vo = new QueryVo();
+        User user1 = new User();
+        user1.setUsername("%小%");
+        vo.setUser(user1);
+        List<User> list = userDao.findByQueryVo(vo);
+        for (User user : list) {
+            System.out.println(user);
+        }
     }
 }
