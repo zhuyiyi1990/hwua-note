@@ -13,6 +13,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -47,7 +49,9 @@ public class UserTest {
     public void testFindAll() throws IOException {
         List<User> list = userDao.findAll();
         for (User user : list) {
+            System.out.println("每个用户信息:");
             System.out.println(user);
+            System.out.println(user.getAccounts());
         }
     }
 
@@ -107,6 +111,28 @@ public class UserTest {
         vo.setUser(user1);
         List<User> list = userDao.findByQueryVo(vo);
         for (User user : list) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
+    public void testFindByUser() {
+        User user = new User();
+        user.setUsername("小明");
+        user.setSex("男");
+        List<User> list = userDao.findByUser(user);
+        for (User user1 : list) {
+            System.out.println(user1);
+        }
+    }
+
+    @Test
+    public void testFindByIds() {
+        QueryVo vo = new QueryVo();
+        List<Integer> list = new ArrayList<Integer>(Arrays.asList(1, 2, 7));
+        vo.setIds(list);
+        List<User> list1 = userDao.findByIds(vo);
+        for (User user : list1) {
             System.out.println(user);
         }
     }
