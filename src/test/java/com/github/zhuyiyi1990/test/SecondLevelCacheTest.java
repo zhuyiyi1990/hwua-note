@@ -1,7 +1,7 @@
 package com.github.zhuyiyi1990.test;
 
-import com.github.zhuyiyi1990.dao.IAccountDao;
-import com.github.zhuyiyi1990.pojo.Account;
+import com.github.zhuyiyi1990.dao.IUserDao;
+import com.github.zhuyiyi1990.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -12,37 +12,35 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
-public class AccountTest {
+public class SecondLevelCacheTest {
     private InputStream in;
 
     private SqlSessionFactory factory;
-
-    private SqlSession sqlSession;
-
-    private IAccountDao accountDao;
 
     @Before
     public void init() throws IOException {
         in = Resources.getResourceAsStream("SqlMapperConfig.xml");
         factory = new SqlSessionFactoryBuilder().build(in);
-        sqlSession = factory.openSession(true);
-        accountDao = sqlSession.getMapper(IAccountDao.class);
     }
 
     @After
     public void close() throws IOException {
-        if (sqlSession != null) {
-            sqlSession.close();
-        }
         if (in != null) {
             in.close();
         }
     }
 
     @Test
-    public void testFindAll() {
-        List<Account> list = accountDao.findAll();
+    public void testSecondLevelCache() {
+        SqlSession sqlSession1 = factory.openSession(true);
+        IUserDao userDao1 = sqlSession1.getMapper(IUserDao.class);
+        User user1 = userDao1.findById(1);
+        sqlSession1.close();
+        SqlSession sqlSession2 = factory.openSession(true);
+        IUserDao userDao2 = sqlSession2.getMapper(IUserDao.class);
+        User user2 = userDao2.findById(1);
+        sqlSession2.close();
+        System.out.println(user1 == user2);
     }
 }
