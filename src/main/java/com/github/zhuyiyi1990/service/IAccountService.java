@@ -1,17 +1,9 @@
 package com.github.zhuyiyi1990.service;
 
-import com.github.zhuyiyi1990.pojo.Account;
-
-import java.util.List;
-
 public interface IAccountService {
-    public abstract List<Account> findAll();
+    public abstract void saveAccount();
 
-    public abstract Account findById(int id);
+    public abstract void updateAccount(int i);
 
-    public abstract int save(Account account);
-
-    public abstract int update(Account account);
-
-    public abstract int delete(int id);
+    public abstract int deleteAccount();
 }
