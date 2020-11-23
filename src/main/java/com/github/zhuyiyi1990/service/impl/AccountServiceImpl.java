@@ -1,23 +1,42 @@
 package com.github.zhuyiyi1990.service.impl;
 
+import com.github.zhuyiyi1990.dao.IAccountDao;
+import com.github.zhuyiyi1990.pojo.Account;
 import com.github.zhuyiyi1990.service.IAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("accountService")
+@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 public class AccountServiceImpl implements IAccountService {
-    @Override
-    public void saveAccount() {
-        System.out.println("保存账户");
+    @Autowired
+    private IAccountDao accountDao;
+
+    public void setAccountDao(IAccountDao accountDao) {
+        this.accountDao = accountDao;
     }
 
     @Override
-    public void updateAccount(int i) {
-        System.out.println("更新账户");
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public Account findAccountById(int id) {
+        return accountDao.findAccountById(id);
     }
 
     @Override
-    public int deleteAccount() {
-        System.out.println("删除账户");
-        return 0;
+    public int update(Account account) {
+        return accountDao.update(account);
+    }
+
+    @Override
+    public void transfer(String sourceName, String targetName, float money) {
+        Account source = accountDao.findAccountByName(sourceName);
+        Account target = accountDao.findAccountByName(targetName);
+        source.setMoney(source.getMoney() - money);
+        target.setMoney(target.getMoney() + money);
+        update(source);
+//        int i = 1 / 0;
+        update(target);
     }
 }

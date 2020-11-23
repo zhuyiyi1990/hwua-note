@@ -1,9 +1,11 @@
 package com.github.zhuyiyi1990.service;
 
+import com.github.zhuyiyi1990.pojo.Account;
+
 public interface IAccountService {
-    public abstract void saveAccount();
+    public abstract Account findAccountById(int id);
 
-    public abstract void updateAccount(int i);
+    public abstract int update(Account account);
 
-    public abstract int deleteAccount();
+    public abstract void transfer(String sourceName, String targetName, float money);
 }

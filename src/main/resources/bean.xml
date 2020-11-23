@@ -2,15 +2,42 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        https://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/aop
-        https://www.springframework.org/schema/aop/spring-aop.xsd
-        http://www.springframework.org/schema/context
-        https://www.springframework.org/schema/context/spring-context.xsd">
-    <!--配置spring创建容器时要扫描的包-->
-    <context:component-scan base-package="com.github.zhuyiyi1990"/>
-    <!--配置spring开启注解AOP的支持-->
-    <aop:aspectj-autoproxy/>
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.1.4.16:3306/zhuyiyi"/>
+        <property name="username" value="root"/>
+        <property name="password" value="PW99-mys"/>
+    </bean>
+    <bean id="accountDao" class="com.github.zhuyiyi1990.dao.impl.AccountDaoImpl">
+        <!--注入数据源，在注入数据源时会创建JdbcTemplate-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="accountService" class="com.github.zhuyiyi1990.service.impl.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" propagation="REQUIRED" read-only="false"/>
+            <!--上面全匹配，下面只匹配部分，所有下面优先级高
+                如果需要两行对所有方法都设置了，那么我们的方法命名要按规则，查询都用find
+            -->
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <!--配置切入点表达式-->
+        <aop:pointcut id="pt1" expression="execution(* com.github.zhuyiyi1990.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1"/>
+    </aop:config>
 </beans>
