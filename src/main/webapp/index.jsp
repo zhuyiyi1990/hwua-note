@@ -4,10 +4,24 @@
     <title>Title</title>
 </head>
 <body>
-    <h3>入门程序</h3>
-    <a href="hello">入门程序</a><br/>
-    <a href="requestMapping.jsp">requestMapping.jsp</a><br/>
-    <a href="params.jsp">params.jsp</a><br/>
-    <a href="anno.jsp">anno.jsp</a>
+<a href="${pageContext.request.contextPath}/user/testReturnString">testReturnString</a><br/>
+<a href="${pageContext.request.contextPath}/response.jsp">response.jsp</a><br/>
+<hr/>
+<h3>文件上传</h3>
+<form action="user/testFileUpload1" method="post" enctype="multipart/form-data">
+    选择文件:<input type="file" name="upload"/><br/>
+    <input type="submit" value="上传"/>
+</form>
+<hr/>
+<form action="user/testFileUpload2" method="post" enctype="multipart/form-data">
+    选择文件:<input type="file" name="upload"/><br/>
+    <input type="submit" value="上传"/>
+</form>
+<hr/>
+<h3>异常处理</h3>
+<a href="user/testException">异常处理</a>
+<hr/>
+<h3>拦截器</h3>
+<a href="user/testInterceptor">拦截器</a>
 </body>
 </html>

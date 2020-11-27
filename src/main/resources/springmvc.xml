@@ -10,7 +10,7 @@
        http://www.springframework.org/schema/mvc
        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!--指定创建spring容器时扫描的包-->
+    <!--配置创建spring容器时扫描的包-->
     <context:component-scan base-package="com.github.zhuyiyi1990"/>
 
     <!--配置视图解析器-->
@@ -19,15 +19,36 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
-        <!--给工厂注入一个新的类型转换器-->
-        <property name="converters">
-            <set>
-                <!--配置自定义类型转换器-->
-                <bean class="com.github.zhuyiyi1990.converter.StringToDateConverter"/>
-            </set>
-        </property>
+    <!--开启springmvc框架注解配置的支持-->
+    <mvc:annotation-driven/>
+
+    <mvc:resources location="/js/" mapping="/js/**/"/><!--javascript-->
+    <mvc:resources location="/css/" mapping="/css/**/"/><!--样式-->
+    <mvc:resources location="/images/" mapping="/images/**/"/><!--图片-->
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485760"/><!--限制上传文件大小10M-->
     </bean>
 
-    <mvc:annotation-driven conversion-service="conversionService"/>
+    <bean id="sysExceptionResolver" class="com.github.zhuyiyi1990.exception.SysExceptionResolver"/>
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--要拦截的方法-->
+            <mvc:mapping path="/user/*"/>
+            <!--配置拦截器对象-->
+            <bean class="com.github.zhuyiyi1990.interceptor.MyInterceptor1"/>
+            <!--不要拦截的方法,上下只要配置一个即可-->
+            <!--<mvc:exclude-mapping path=""/>-->
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!--要拦截的方法-->
+            <mvc:mapping path="/**"/>
+            <!--配置拦截器对象-->
+            <bean class="com.github.zhuyiyi1990.interceptor.MyInterceptor2"/>
+            <!--不要拦截的方法,上下只要配置一个即可-->
+            <!--<mvc:exclude-mapping path=""/>-->
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
