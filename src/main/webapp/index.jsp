@@ -4,24 +4,13 @@
     <title>Title</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/user/testReturnString">testReturnString</a><br/>
-<a href="${pageContext.request.contextPath}/response.jsp">response.jsp</a><br/>
+<a href="account/findAll">测试</a>
 <hr/>
-<h3>文件上传</h3>
-<form action="user/testFileUpload1" method="post" enctype="multipart/form-data">
-    选择文件:<input type="file" name="upload"/><br/>
-    <input type="submit" value="上传"/>
+<h3>测试保存</h3>
+<form action="account/saveAccount" method="post">
+    姓名:<input type="text" name="name"/><br/>
+    金额:<input type="text" name="money"/><br/>
+    <input type="submit" value="提交"/>
 </form>
-<hr/>
-<form action="user/testFileUpload2" method="post" enctype="multipart/form-data">
-    选择文件:<input type="file" name="upload"/><br/>
-    <input type="submit" value="上传"/>
-</form>
-<hr/>
-<h3>异常处理</h3>
-<a href="user/testException">异常处理</a>
-<hr/>
-<h3>拦截器</h3>
-<a href="user/testInterceptor">拦截器</a>
 </body>
 </html>
