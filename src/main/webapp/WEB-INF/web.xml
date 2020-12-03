@@ -35,6 +35,8 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!--配置spring的监听器,用于启动服务器时获取spring容器,
+默认情况下只能加载/WEB-INF/applicationContext.xml配置文件-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>

@@ -19,8 +19,8 @@ public class TestMybatis {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
         SqlSession sqlSession = factory.openSession(true);
         IAccountDao accountDao = sqlSession.getMapper(IAccountDao.class);
-        List<Account> list = accountDao.findAll();
-        for (Account account : list) {
+        List<Account> accounts = accountDao.findAll();
+        for (Account account : accounts) {
             System.out.println(account);
         }
         sqlSession.close();
