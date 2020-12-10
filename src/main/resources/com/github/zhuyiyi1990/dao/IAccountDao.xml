@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.zhuyiyi1990.dao.IAccountDao">
+    <resultMap id="accountUserMap" type="account">
+        <id column="id" property="id"/>
+        <result column="uid" property="uid"/>
+        <result column="money" property="money"/>
+        <!--一对一的关系映射:配置封装user的内容
+          property:对应的属性,  javaType:属性对应的类型 uid:传递给select映射的参数，select:指定使用的select映射的id-->
+        <association property="user" javaType="user" column="uid"
+                     select="com.github.zhuyiyi1990.dao.IUserDao.findById"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="accountUserMap">
+        select * from account
+    </select>
+
+    <!--通过用户id查找对应的账户-->
+    <select id="findByUid" parameterType="Integer" resultType="account">
+        select * from account where uid=#{uid}
+    </select>
+</mapper>

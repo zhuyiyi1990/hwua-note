@@ -1,9 +1,12 @@
 package com.github.zhuyiyi1990.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class QueryVo implements Serializable {
     private User user;
+
+    private List<Integer> ids;
 
     public User getUser() {
         return user;
@@ -11,5 +14,13 @@ public class QueryVo implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Integer> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<Integer> ids) {
+        this.ids = ids;
     }
 }
