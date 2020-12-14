@@ -3,6 +3,7 @@ package com.github.zhuyiyi1990.service.impl;
 import com.github.zhuyiyi1990.dao.IAccountDao;
 import com.github.zhuyiyi1990.pojo.Account;
 import com.github.zhuyiyi1990.service.IAccountService;
+import com.github.zhuyiyi1990.utils.TransactionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class AccountServiceImpl implements IAccountService {
     @Autowired
     @Qualifier("accountDao")
     private IAccountDao accountDao;
+
+    @Autowired
+    private TransactionManager txManager;
 
     public AccountServiceImpl() {
         System.out.println("service创建了");
@@ -39,28 +43,102 @@ public class AccountServiceImpl implements IAccountService {
         this.accountDao = accountDao;
     }
 
+    public void setTxManager(TransactionManager txManager) {
+        this.txManager = txManager;
+    }
+
     @Override
     public List<Account> findAll() {
-        return accountDao.findAll();
+        try {
+            txManager.beginTransaction();
+            List<Account> accounts = accountDao.findAll();
+            txManager.commit();
+            return accounts;
+        } catch (Exception e) {
+            txManager.rollback();
+            throw new RuntimeException(e);
+        } finally {
+            txManager.release();
+        }
     }
 
     @Override
     public Account findById(int id) {
-        return accountDao.findById(id);
+        try {
+            txManager.beginTransaction();
+            Account account = accountDao.findById(id);
+            txManager.commit();
+            return account;
+        } catch (Exception e) {
+            txManager.rollback();
+            throw new RuntimeException(e);
+        } finally {
+            txManager.release();
+        }
     }
 
     @Override
     public int save(Account account) {
-        return accountDao.save(account);
+        try {
+            txManager.beginTransaction();
+            int row = accountDao.save(account);
+            txManager.commit();
+            return row;
+        } catch (Exception e) {
+            txManager.rollback();
+            throw new RuntimeException(e);
+        } finally {
+            txManager.release();
+        }
     }
 
     @Override
     public int update(Account account) {
-        return accountDao.update(account);
+        try {
+            txManager.beginTransaction();
+            int row = accountDao.update(account);
+            txManager.commit();
+            return row;
+        } catch (Exception e) {
+            txManager.rollback();
+            throw new RuntimeException(e);
+        } finally {
+            txManager.release();
+        }
     }
 
     @Override
     public int delete(int id) {
-        return accountDao.delete(id);
+        try {
+            txManager.beginTransaction();
+            int row = accountDao.delete(id);
+            txManager.commit();
+            return row;
+        } catch (Exception e) {
+            txManager.rollback();
+            throw new RuntimeException(e);
+        } finally {
+            txManager.release();
+        }
+    }
+
+    @Override
+    public void transfer(String sourceName, String targetName, Float money) {
+        try {
+            txManager.beginTransaction();
+            Account source = accountDao.findAccountByName(sourceName);
+            Account target = accountDao.findAccountByName(targetName);
+            source.setMoney(source.getMoney() - money);
+            target.setMoney(target.getMoney() + money);
+            accountDao.update(source);
+            int i = 1 / 0;
+            accountDao.update(target);
+            txManager.commit();
+        } catch (Exception e) {
+            txManager.rollback();
+            throw new RuntimeException(e);
+        } finally {
+            txManager.release();
+        }
     }
 }
