@@ -1,42 +1,66 @@
 package com.github.zhuyiyi1990.service.impl;
 
 import com.github.zhuyiyi1990.dao.IAccountDao;
-import com.github.zhuyiyi1990.factory.BeanFactory;
+import com.github.zhuyiyi1990.pojo.Account;
 import com.github.zhuyiyi1990.service.IAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.util.List;
 
+@Service("accountService")
 public class AccountServiceImpl implements IAccountService {
-    //此时关注度不要在他是否应该在这里,主要体现这几种类型数据
-    //如果是经常变化的数据,并不适用于注入的方式
-    private String name;
-
-    private Integer age;
-
-    private Date birthday;
-
-    private IAccountDao accountDao = (IAccountDao) BeanFactory.getBean("accountDao");
+    @Autowired
+    @Qualifier("accountDao")
+    private IAccountDao accountDao;
 
     public AccountServiceImpl() {
-        System.out.println("对象创建");
+        System.out.println("service创建了");
     }
 
-    public AccountServiceImpl(String name, Integer age, Date birthday) {
-        this.name = name;
-        this.age = age;
-        this.birthday = birthday;
+    @PostConstruct
+    public void init() {
+        System.out.println("初始化方法执行");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("销毁方法执行");
+    }
+
+    public IAccountDao getAccountDao() {
+        return accountDao;
+    }
+
+    public void setAccountDao(IAccountDao accountDao) {
+        this.accountDao = accountDao;
     }
 
     @Override
-    public void saveAccount() {
-        accountDao.saveAccount();
+    public List<Account> findAll() {
+        return accountDao.findAll();
     }
 
-    public void init() {
-        System.out.println("对象初始化了");
+    @Override
+    public Account findById(int id) {
+        return accountDao.findById(id);
     }
 
-    public void destroy() {
-        System.out.println("对象销毁了");
+    @Override
+    public int save(Account account) {
+        return accountDao.save(account);
+    }
+
+    @Override
+    public int update(Account account) {
+        return accountDao.update(account);
+    }
+
+    @Override
+    public int delete(int id) {
+        return accountDao.delete(id);
     }
 }
