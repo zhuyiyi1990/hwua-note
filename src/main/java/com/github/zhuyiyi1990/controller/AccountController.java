@@ -15,7 +15,7 @@ public class AccountController {
     @Autowired
     private IAccountService accountService;
 
-    @RequestMapping("findAll")
+    @RequestMapping("/findAll")
     public String findAll(ModelMap modelMap) {
         System.out.println("表现层:查询所有账户...");
         List<Account> accounts = accountService.findAll();
