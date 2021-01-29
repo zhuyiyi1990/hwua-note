@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--配置dao-->
+    <bean id="accountDao" class="com.github.zhuyiyi1990.dao.impl.AccountDaoImpl"/>
+
+    <bean id="now" class="java.util.Date"/>
+
+    <!--配置service-->
+    <bean id="accountService" class="com.github.zhuyiyi1990.service.impl.AccountServiceImpl" init-method="init"
+          destroy-method="destroy">
+        <constructor-arg name="name" value="test"/>
+        <constructor-arg name="age" value="18"/>
+        <constructor-arg name="birthday" ref="now"/>
+    </bean>
+    <!--<bean id="instanceFactory" class="com.github.zhuyiyi1990.factory.InstanceFactory"/>
+    <bean id="accountService" factory-bean="instanceFactory" factory-method="getAccountService"/>-->
+    <!--    <bean id="accountService" class="com.github.zhuyiyi1990.factory.StaticFactory" factory-method="getAccountService"/>-->
+
+    <bean id="counterpoise" class="com.github.zhuyiyi1990.service.impl.AccountServiceImpl2">
+        <property name="name" value="test"/>
+        <property name="age" value="20"/>
+        <property name="birthday" ref="now"/>
+    </bean>
+
+</beans>
