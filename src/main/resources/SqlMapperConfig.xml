@@ -4,30 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <!--引入外部属性文件-->
-    <properties resource="jdbcConfig.properties"/>
-
-    <!--自定义别名-->
-    <typeAliases>
-        <package name="com.github.zhuyiyi1990.pojo"/>
-    </typeAliases>
-
-    <!--配置环境-->
+    <!--配置mybatis的环境-->
     <environments default="mysql">
+        <!--配置mysql的环境-->
         <environment id="mysql">
+            <!--配置事务的类型,默认jdbc事务处理-->
             <transactionManager type="JDBC"/>
+            <!--配置数据库连接的信息,用的是数据源(连接池)-->
             <dataSource type="POOLED">
-                <property name="driver" value="${jdbc.driver}"/>
-                <property name="url" value="${jdbc.url}"/>
-                <property name="username" value="${jdbc.username}"/>
-                <property name="password" value="${jdbc.password}"/>
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://192.1.4.16:3306/zhuyiyi"/>
+                <property name="username" value="root"/>
+                <property name="password" value="PW99-mys"/>
             </dataSource>
         </environment>
     </environments>
 
-    <!--引入映射配置文件-->
+    <!--告知mybatis映射配置的位置-->
     <mappers>
-        <package name="com.github.zhuyiyi1990.dao"/>
+        <mapper resource="com/github/zhuyiyi1990/dao/IUserDao.xml"/>
     </mappers>
 
 </configuration>
