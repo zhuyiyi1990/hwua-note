@@ -1,42 +1,64 @@
 package com.github.zhuyiyi1990.service.impl;
 
 import com.github.zhuyiyi1990.dao.IAccountDao;
-import com.github.zhuyiyi1990.factory.BeanFactory;
+import com.github.zhuyiyi1990.pojo.Account;
 import com.github.zhuyiyi1990.service.IAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.util.List;
 
+@Service("accountService")
 public class AccountServiceImpl implements IAccountService {
 
-    private String name;
+    @Autowired
+    @Qualifier("accountDao")
+    private IAccountDao accountDao;
 
-    private Integer age;
-
-    private Date birthday;
-
-    private IAccountDao accountDao = (IAccountDao) BeanFactory.getBean("accountDao");
-
-    public AccountServiceImpl() {
-        System.out.println("对象创建");
+    public IAccountDao getAccountDao() {
+        return accountDao;
     }
 
-    public AccountServiceImpl(String name, Integer age, Date birthday) {
-        this.name = name;
-        this.age = age;
-        this.birthday = birthday;
+    public void setAccountDao(IAccountDao accountDao) {
+        this.accountDao = accountDao;
     }
 
     @Override
-    public void saveAccount() {
-        accountDao.saveAccount();
+    public List<Account> findAll() {
+        return accountDao.findAll();
     }
 
+    @Override
+    public Account findById(int id) {
+        return accountDao.findById(id);
+    }
+
+    @Override
+    public int save(Account account) {
+        return accountDao.save(account);
+    }
+
+    @Override
+    public int update(Account account) {
+        return accountDao.update(account);
+    }
+
+    @Override
+    public int delete(int id) {
+        return accountDao.delete(id);
+    }
+
+    @PostConstruct
     public void init() {
-        System.out.println("对象初始化了");
+        System.out.println("初始化方法执行");
     }
 
+    @PreDestroy
     public void destroy() {
-        System.out.println("对象销毁了");
+        System.out.println("销毁方法执行");
     }
 
 }
