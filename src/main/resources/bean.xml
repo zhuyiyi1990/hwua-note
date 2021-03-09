@@ -2,28 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/aop
-        https://www.springframework.org/schema/aop/spring-aop.xsd">
-
-    <!--配置spring的IoC，把service对象配置进来-->
-    <bean id="accountService" class="com.github.zhuyiyi1990.service.impl.AccountServiceImpl"/>
-
-    <!--配置Logger-->
-    <bean id="logger" class="com.github.zhuyiyi1990.utils.Logger"/>
-
-    <aop:config>
-        <!-- 配置的代码都写在此处 -->
-        <aop:aspect id="logAdvice" ref="logger">
-            <!--配置通知的类型要写在此处-->
-            <aop:pointcut id="pt1"
-                          expression="execution(* com.github.zhuyiyi1990.service.impl.*.*(..))"/>
-            <aop:before method="beforePrintLog" pointcut-ref="pt1"/>
-            <aop:after-returning method="afterReturningPrintLog" pointcut-ref="pt1"/>
-            <aop:after-throwing method="afterThrowingPrintLog" pointcut-ref="pt1"/>
-            <aop:after method="afterPrintLog" pointcut-ref="pt1"/>
-        </aop:aspect>
-    </aop:config>
-
+         http://www.springframework.org/schema/aop
+         https://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx.xsd
+         http://www.springframework.org/schema/context
+         https://www.springframework.org/schema/context/spring-context.xsd">
 </beans>
