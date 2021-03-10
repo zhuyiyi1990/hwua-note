@@ -5,30 +5,26 @@ import java.util.Date;
 
 public class User implements Serializable {
 
-    private Integer id;
+    private String uname;
 
-    private String username;
+    private int age;
 
-    private Date birthday;
+    private Date birthday;//添加生日属性,java.util.Date类型
 
-    private String sex;
-
-    private String address;
-
-    public Integer getId() {
-        return id;
+    public String getUname() {
+        return uname;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUname(String uname) {
+        this.uname = uname;
     }
 
-    public String getUsername() {
-        return username;
+    public int getAge() {
+        return age;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public Date getBirthday() {
@@ -39,30 +35,12 @@ public class User implements Serializable {
         this.birthday = birthday;
     }
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
+                "uname='" + uname + '\'' +
+                ", age=" + age +
                 ", birthday=" + birthday +
-                ", sex='" + sex + '\'' +
-                ", address='" + address + '\'' +
                 '}';
     }
 

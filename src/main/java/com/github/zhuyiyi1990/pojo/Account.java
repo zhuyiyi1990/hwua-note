@@ -1,27 +1,40 @@
 package com.github.zhuyiyi1990.pojo;
 
-public class Account {
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
-    private int id;
+public class Account implements Serializable {
 
-    private String name;
+    private String username;
+
+    private String password;
 
     private float money;
 
-    public int getId() {
-        return id;
+    private User user;
+
+    private List<User> list;
+
+    private Map<String, User> map;
+
+    public Account() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getUsername() {
+        return username;
     }
 
-    public String getName() {
-        return name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public float getMoney() {
@@ -32,12 +45,39 @@ public class Account {
         this.money = money;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<User> getList() {
+        return list;
+    }
+
+    public void setList(List<User> list) {
+        this.list = list;
+    }
+
+    public Map<String, User> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<String, User> map) {
+        this.map = map;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", money=" + money +
+                ", user=" + user +
+                ", list=" + list +
+                ", map=" + map +
                 '}';
     }
 
