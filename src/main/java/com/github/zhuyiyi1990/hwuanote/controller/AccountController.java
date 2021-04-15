@@ -1,10 +1,10 @@
-package com.github.zhuyiyi1990.controller;
+package com.github.zhuyiyi1990.hwuanote.controller;
 
-import com.github.zhuyiyi1990.pojo.Account;
-import com.github.zhuyiyi1990.service.IAccountService;
+import com.github.zhuyiyi1990.hwuanote.pojo.Account;
+import com.github.zhuyiyi1990.hwuanote.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -17,10 +17,10 @@ public class AccountController {
     private IAccountService accountService;
 
     @RequestMapping("/findAll")
-    public String findAll(Model model) {
+    public String findAll(ModelMap modelMap) {
         System.out.println("表现层:查询所有账户...");
         List<Account> accounts = accountService.findAll();
-        model.addAttribute("accounts", accounts);
+        modelMap.addAttribute("accounts", accounts);
         return "list";
     }
 

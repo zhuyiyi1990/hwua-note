@@ -1,8 +1,8 @@
-package com.github.zhuyiyi1990.service.impl;
+package com.github.zhuyiyi1990.hwuanote.service.impl;
 
-import com.github.zhuyiyi1990.dao.IAccountDao;
-import com.github.zhuyiyi1990.pojo.Account;
-import com.github.zhuyiyi1990.service.IAccountService;
+import com.github.zhuyiyi1990.hwuanote.dao.IAccountDao;
+import com.github.zhuyiyi1990.hwuanote.pojo.Account;
+import com.github.zhuyiyi1990.hwuanote.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

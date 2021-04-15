@@ -1,6 +1,6 @@
-package com.github.zhuyiyi1990.test;
+package com.github.zhuyiyi1990.hwuanote.test;
 
-import com.github.zhuyiyi1990.service.IAccountService;
+import com.github.zhuyiyi1990.hwuanote.service.IAccountService;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

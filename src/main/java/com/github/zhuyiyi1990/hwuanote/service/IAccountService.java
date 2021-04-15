@@ -1,10 +1,10 @@
-package com.github.zhuyiyi1990.dao;
+package com.github.zhuyiyi1990.hwuanote.service;
 
-import com.github.zhuyiyi1990.pojo.Account;
+import com.github.zhuyiyi1990.hwuanote.pojo.Account;
 
 import java.util.List;
 
-public interface IAccountDao {
+public interface IAccountService {
 
     /**
      * 查询所有账户
@@ -14,7 +14,7 @@ public interface IAccountDao {
     public abstract List<Account> findAll();
 
     /**
-     * 保存账户信息
+     * 保存账户
      *
      * @param account
      */

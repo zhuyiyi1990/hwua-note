@@ -1,4 +1,4 @@
-package com.github.zhuyiyi1990.pojo;
+package com.github.zhuyiyi1990.hwuanote.pojo;
 
 import java.io.Serializable;
 

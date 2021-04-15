@@ -1,7 +1,7 @@
-package com.github.zhuyiyi1990.test;
+package com.github.zhuyiyi1990.hwuanote.test;
 
-import com.github.zhuyiyi1990.dao.IAccountDao;
-import com.github.zhuyiyi1990.pojo.Account;
+import com.github.zhuyiyi1990.hwuanote.dao.IAccountDao;
+import com.github.zhuyiyi1990.hwuanote.pojo.Account;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

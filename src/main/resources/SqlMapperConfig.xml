@@ -9,7 +9,7 @@
 
     <!--自定义别名-->
     <typeAliases>
-        <package name="com.github.zhuyiyi1990.pojo"/>
+        <package name="com.github.zhuyiyi1990.hwuanote.pojo"/>
     </typeAliases>
 
     <!--配置环境-->
@@ -27,7 +27,7 @@
 
     <!--引入映射配置文件-->
     <mappers>
-        <package name="com.github.zhuyiyi1990.dao"/>
+        <package name="com.github.zhuyiyi1990.hwuanote.dao"/>
     </mappers>
 
 </configuration>
