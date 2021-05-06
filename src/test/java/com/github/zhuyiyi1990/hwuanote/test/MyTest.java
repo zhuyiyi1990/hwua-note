@@ -1,17 +1,25 @@
 package com.github.zhuyiyi1990.hwuanote.test;
 
+import com.github.zhuyiyi1990.hwuanote.config.SpringConfiguration;
 import com.github.zhuyiyi1990.hwuanote.service.IAccountService;
 import org.junit.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {SpringConfiguration.class})
 public class MyTest {
 
+    @Autowired
+    private IAccountService accountService;
+
     @Test
-    public void test() {
-        ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
-        IAccountService accountService = ac.getBean("accountService", IAccountService.class);
-        System.out.println(accountService);
-        ac.close();
+    public void testAOP() {
+        accountService.saveAccount();
+        accountService.updateAccount(0);
+        accountService.deleteAccount();
     }
 
 }
