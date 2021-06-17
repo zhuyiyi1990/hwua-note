@@ -63,4 +63,20 @@ public interface IUserDao {
 
     public abstract List<User> findByQueryVo(QueryVo vo);
 
+    /**
+     * 通过用户信息查询用户
+     *
+     * @param user
+     * @return
+     */
+    public abstract List<User> findByUser(User user);
+
+    /**
+     * 通过QueryVo中的id集合来查询用用户
+     *
+     * @param vo
+     * @return
+     */
+    public abstract List<User> findByIds(QueryVo vo);
+
 }
