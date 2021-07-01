@@ -1,22 +1,29 @@
 package com.github.zhuyiyi1990.hwuanote.pojo;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class User implements Serializable {
 
-    private String uname;
+    private String username;
+
+    private String password;
 
     private int age;
 
-    private Date birthday;//添加生日属性,java.util.Date类型
-
-    public String getUname() {
-        return uname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUname(String uname) {
-        this.uname = uname;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getAge() {
@@ -27,20 +34,12 @@ public class User implements Serializable {
         this.age = age;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
     @Override
     public String toString() {
         return "User{" +
-                "uname='" + uname + '\'' +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", age=" + age +
-                ", birthday=" + birthday +
                 '}';
     }
 
