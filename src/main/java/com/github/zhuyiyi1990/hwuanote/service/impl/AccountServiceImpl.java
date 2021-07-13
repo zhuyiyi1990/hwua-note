@@ -55,6 +55,17 @@ public class AccountServiceImpl implements IAccountService {
         return accountDao.delete(id);
     }
 
+    @Override
+    public void transfer(String sourceName, String targetName, Float money) {
+        Account source = accountDao.findAccountByName(sourceName);
+        Account target = accountDao.findAccountByName(targetName);
+        source.setMoney(source.getMoney() - money);
+        target.setMoney(target.getMoney() + money);
+        accountDao.update(source);
+//        int i = 1 / 0;
+        accountDao.update(target);
+    }
+
     @PostConstruct
     public void init() {
         System.out.println("初始化方法执行");

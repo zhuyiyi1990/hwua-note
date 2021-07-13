@@ -16,4 +16,6 @@ public interface IAccountService {
 
     public abstract int delete(int id);
 
+    public abstract void transfer(String sourceName, String targetName, Float money);
+
 }
