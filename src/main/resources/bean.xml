@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd">
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <!--配置数据源-->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <!--连接数据库的必备信息-->
-        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://192.1.4.16:3306/zhuyiyi"/>
-        <property name="user" value="root"/>
-        <property name="password" value="PW99-mys"/>
-    </bean>
+    <!--配置spring的IoC，把service对象配置进来-->
+    <bean id="accountService" class="com.github.zhuyiyi1990.hwuanote.service.impl.AccountServiceImpl"/>
 
-    <!--配置QueryRunner,注意防止多个线程同时使用出现干扰,使用多例-->
-    <bean id="runner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
-        <!--注入数据源-->
-        <constructor-arg name="ds" ref="dataSource"/>
-    </bean>
+    <!--配置Logger-->
+    <bean id="logger" class="com.github.zhuyiyi1990.hwuanote.utils.Logger"/>
 
-    <!--配置Dao-->
-    <bean id="accountDao" class="com.github.zhuyiyi1990.hwuanote.dao.impl.AccountDaoImpl">
-        <!--注入QueryRunner-->
-        <property name="runner" ref="runner"/>
-    </bean>
-
-    <!--配置Service-->
-    <bean id="accountService" class="com.github.zhuyiyi1990.hwuanote.service.impl.AccountServiceImpl">
-        <!--注入Dao-->
-        <property name="accountDao" ref="accountDao"/>
-    </bean>
+    <aop:config>
+        <!-- 配置的代码都写在此处 -->
+        <aop:aspect id="logAdvice" ref="logger">
+            <!--配置通知的类型要写在此处-->
+            <aop:pointcut id="pt1" expression="execution(* com.github.zhuyiyi1990.hwuanote.service.impl.*Impl.*(..))"/>
+            <aop:before method="beforePrintLog" pointcut-ref="pt1"/>
+            <aop:after-returning method="afterReturningPrintLog" pointcut-ref="pt1"/>
+            <aop:after-throwing method="afterThrowingPrintLog" pointcut-ref="pt1"/>
+            <aop:after method="afterPrintLog" pointcut-ref="pt1"/>
+        </aop:aspect>
+    </aop:config>
 
 </beans>
