@@ -16,10 +16,8 @@ public class AccountServiceTest {
     private IAccountService accountService;
 
     @Test
-    public void test() {
-        accountService.saveAccount();
-        accountService.updateAccount(0);
-        accountService.deleteAccount();
+    public void testTransfer() {
+        accountService.transfer("aaa", "ccc", 100);
     }
 
 }
