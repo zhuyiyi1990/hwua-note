@@ -12,4 +12,8 @@
         insert into account2 (name,money) values (#{name},#{money})
     </insert>
 
+    <delete id="deleteAccount" parameterType="int">
+        delete from account2 where id = #{id}
+    </delete>
+
 </mapper>

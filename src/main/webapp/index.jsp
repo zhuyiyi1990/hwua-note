@@ -12,5 +12,11 @@
         金额:<input type="text" name="money"/><br/>
         <input type="submit" value="提交"/>
     </form>
+    <hr/>
+    <h3>测试删除</h3>
+    <form action="${pageContext.request.contextPath}/account/deleteAccount" method="post">
+        id:<input type="text" name="id"/><br/>
+        <input type="submit" value="提交"/>
+    </form>
 </body>
 </html>

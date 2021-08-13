@@ -26,4 +26,9 @@ public class AccountServiceImpl implements IAccountService {
         accountDao.saveAccount(account);
     }
 
+    @Override
+    public int deleteAccount(int id) {
+        return accountDao.deleteAccount(id);
+    }
+
 }

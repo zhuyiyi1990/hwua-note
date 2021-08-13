@@ -20,4 +20,6 @@ public interface IAccountDao {
      */
     abstract public void saveAccount(Account account);
 
+    abstract public int deleteAccount(int id);
+
 }

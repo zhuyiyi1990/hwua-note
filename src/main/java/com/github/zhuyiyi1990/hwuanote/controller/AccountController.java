@@ -30,4 +30,10 @@ public class AccountController {
         return "redirect:/account/findAll";
     }
 
+    @RequestMapping("/deleteAccount")
+    public String deleteAccount(int id) {
+        accountService.deleteAccount(id);
+        return "redirect:/account/findAll";
+    }
+
 }
