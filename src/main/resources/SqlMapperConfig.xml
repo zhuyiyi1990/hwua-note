@@ -7,6 +7,13 @@
     <!--引用外部属性文件信息-->
     <properties resource="jdbcConfig.properties"/>
 
+    <!--配置延迟加载参数-->
+    <settings>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
     <!--自定义别名-->
     <typeAliases>
         <!--单个别名定义,不区分大小写,如果多个类都要配置比较麻烦-->
