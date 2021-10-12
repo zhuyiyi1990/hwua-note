@@ -4,13 +4,23 @@
     <title>index.jsp</title>
 </head>
 <body>
-    <h3>入门程序</h3>
-    <a href="${pageContext.request.contextPath}/hello">入门程序</a><br/>
-    <hr/>
-    <a href="${pageContext.request.contextPath}/requestMapping.jsp">requestMapping.jsp</a>
-    <hr/>
-    <a href="${pageContext.request.contextPath}/params.jsp">params.jsp</a>
-    <hr/>
-    <a href="${pageContext.request.contextPath}/anno.jsp">anno.jsp</a>
+<a href="${pageContext.request.contextPath}/response.jsp">response.jsp</a>
+<hr/>
+<h3>文件上传</h3>
+<form action="${pageContext.request.contextPath}/user/testFileUpload1" method="post" enctype="multipart/form-data">
+    选择文件:<input type="file" name="upload"/><br/>
+    <input type="submit" value="上传"/>
+</form>
+<hr/>
+<form action="${pageContext.request.contextPath}/user/testFileUpload2" method="post" enctype="multipart/form-data">
+    选择文件:<input type="file" name="upload"/><br/>
+    <input type="submit" value="上传"/>
+</form>
+<hr/>
+<h3>异常处理</h3>
+<a href="${pageContext.request.contextPath}/user/testException">异常处理</a>
+<hr/>
+<h3>拦截器</h3>
+<a href="${pageContext.request.contextPath}/user/testInterceptor">拦截器</a>
 </body>
 </html>
