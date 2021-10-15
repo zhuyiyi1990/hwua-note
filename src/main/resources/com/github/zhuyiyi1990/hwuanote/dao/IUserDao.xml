@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace属性值必须为持久层接口的全限定类名,  命名空间+id来确定唯一的sql语句-->
+<mapper namespace="com.github.zhuyiyi1990.hwuanote.dao.IUserDao">
+
+    <!--配置查询所有操作-->
+    <!-- id为方法名  resultType表示返回值类型 -->
+    <select id="findAll" resultType="com.github.zhuyiyi1990.hwuanote.pojo.User">
+        select * from user
+    </select>
+
+    <!--通过id查找用户-->
+    <select id="findById" parameterType="int" resultType="com.github.zhuyiyi1990.hwuanote.pojo.User">
+        select * from user where id=#{id}
+    </select>
+
+    <!--保存用户-->
+    <insert id="saveUser" parameterType="com.github.zhuyiyi1990.hwuanote.pojo.User">
+        <!--keyProperty:属性名(注意区分大小写) keyColumn:列名  order:查询时刻:添加之后-->
+        <selectKey keyProperty="id" keyColumn="id" order="AFTER" resultType="int">
+            select last_insert_id();
+        </selectKey>
+        insert into user (username, birthday, sex, address)
+        values (#{username}, #{birthday}, #{sex}, #{address})
+    </insert>
+
+    <!--更新用户-->
+    <update id="updateUser" parameterType="com.github.zhuyiyi1990.hwuanote.pojo.User">
+        update user set username=#{username}, birthday=#{birthday}, sex=#{sex}, address=#{address}
+        where id=#{id}
+    </update>
+
+    <!--删除操作-->
+    <delete id="deleteUser" parameterType="int">
+        delete from user where id=#{id}
+    </delete>
+
+    <!--通过名称模糊查找用户-->
+    <select id="findByName" parameterType="String" resultType="com.github.zhuyiyi1990.hwuanote.pojo.User">
+        select * from user where username like #{username}
+    </select>
+
+</mapper>
