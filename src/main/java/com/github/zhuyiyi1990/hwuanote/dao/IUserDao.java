@@ -1,5 +1,6 @@
 package com.github.zhuyiyi1990.hwuanote.dao;
 
+import com.github.zhuyiyi1990.hwuanote.pojo.QueryVo;
 import com.github.zhuyiyi1990.hwuanote.pojo.User;
 
 import java.util.List;
@@ -52,5 +53,14 @@ public interface IUserDao {
      * @return
      */
     List<User> findByName(String username);
+
+    /**
+     * 统计总记录条数
+     *
+     * @return
+     */
+    int findTotal();
+
+    List<User> findByQueryVo(QueryVo vo);
 
 }

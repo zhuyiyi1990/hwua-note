@@ -1,6 +1,7 @@
 package com.github.zhuyiyi1990.hwuanote.test;
 
 import com.github.zhuyiyi1990.hwuanote.dao.IUserDao;
+import com.github.zhuyiyi1990.hwuanote.pojo.QueryVo;
 import com.github.zhuyiyi1990.hwuanote.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -87,6 +88,24 @@ public class UserTest {
     @Test
     public void testFindByName() {
         List<User> list = userDao.findByName("%小%");
+        for (User user : list) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
+    public void testFindTotal() {
+        int total = userDao.findTotal();
+        System.out.println(total);
+    }
+
+    @Test
+    public void testFindByQueryVo() {
+        QueryVo vo = new QueryVo();
+        User user1 = new User();
+        user1.setUsername("%小%");
+        vo.setUser(user1);
+        List<User> list = userDao.findByQueryVo(vo);
         for (User user : list) {
             System.out.println(user);
         }
