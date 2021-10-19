@@ -2,6 +2,7 @@ package com.github.zhuyiyi1990.hwuanote.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class User implements Serializable {
 
@@ -14,6 +15,9 @@ public class User implements Serializable {
     private String sex;
 
     private String address;
+
+    //一个用户对应多个账户
+    private List<Account> accounts;
 
     public Integer getId() {
         return id;
@@ -53,6 +57,14 @@ public class User implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 
     @Override
