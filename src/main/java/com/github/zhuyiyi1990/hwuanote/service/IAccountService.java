@@ -1,7 +1,19 @@
 package com.github.zhuyiyi1990.hwuanote.service;
 
+import com.github.zhuyiyi1990.hwuanote.pojo.Account;
+
+import java.util.List;
+
 public interface IAccountService {
 
-    void saveAccount();
+    List<Account> findAll();
+
+    Account findById(int id);
+
+    int save(Account account);
+
+    int update(Account account);
+
+    int delete(int id);
 
 }
