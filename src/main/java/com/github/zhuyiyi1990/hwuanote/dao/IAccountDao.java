@@ -16,4 +16,6 @@ public interface IAccountDao {
 
     int delete(int id);
 
+    Account findAccountByName(String accountName);
+
 }
