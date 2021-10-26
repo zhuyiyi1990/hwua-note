@@ -1,21 +1,26 @@
 package com.github.zhuyiyi1990.hwuanote.service;
 
-import com.github.zhuyiyi1990.hwuanote.pojo.Account;
-
-import java.util.List;
-
 public interface IAccountService {
 
-    List<Account> findAll();
+    //以下三个方法为了选择三类：无参无返回值，有参无返回值，无参有返回值，有参有返回值相当于前两个方法组合
 
-    Account findById(int id);
+    /**
+     * 模拟保存账户
+     */
+    void saveAccount();
 
-    int save(Account account);
+    /**
+     * 模拟更新账户
+     *
+     * @param i
+     */
+    void updateAccount(int i);
 
-    int update(Account account);
-
-    int delete(int id);
-
-    void transfer(String sourceName, String targetName, Float money);
+    /**
+     * 删除账户
+     *
+     * @return
+     */
+    int deleteAccount();
 
 }
