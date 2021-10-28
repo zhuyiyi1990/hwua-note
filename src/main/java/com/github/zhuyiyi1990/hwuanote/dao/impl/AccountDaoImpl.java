@@ -2,18 +2,19 @@ package com.github.zhuyiyi1990.hwuanote.dao.impl;
 
 import com.github.zhuyiyi1990.hwuanote.dao.IAccountDao;
 import com.github.zhuyiyi1990.hwuanote.pojo.Account;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class AccountDaoImpl implements IAccountDao {
 
+    @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     @Override
     public Account findAccountById(int id) {
