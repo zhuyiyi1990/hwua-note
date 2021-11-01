@@ -4,6 +4,8 @@
     <title>success.jsp</title>
 </head>
 <body>
-    <h3>成功！</h3>
+    <h3>成功!</h3>
+    <%--从request域中获取user对象信息--%>
+    ${user.username}
 </body>
 </html>
