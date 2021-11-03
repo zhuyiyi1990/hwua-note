@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.zhuyiyi1990.hwuanote.dao.IAccountDao">
+
+    <select id="findAll" resultType="account">
+        select * from account2
+    </select>
+
+    <insert id="saveAccount" parameterType="account">
+        insert into account2 (name, money) values (#{name}, #{money})
+    </insert>
+
+</mapper>
