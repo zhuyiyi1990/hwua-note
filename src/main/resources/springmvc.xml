@@ -37,4 +37,24 @@
     <!--配置异常处理器-->
     <bean id="sysExceptionResolver" class="com.github.zhuyiyi1990.hwuanote.exception.SysExceptionResolver"/>
 
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--要拦截的方法-->
+            <mvc:mapping path="/user/*"/>
+            <!--配置拦截器对象-->
+            <bean class="com.github.zhuyiyi1990.hwuanote.interceptor.MyInterceptor1"/>
+            <!--不要拦截的方法,上下只要配置一个即可-->
+            <!--<mvc:exclude-mapping path=""/>-->
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!--要拦截的方法-->
+            <mvc:mapping path="/**"/>
+            <!--配置拦截器对象-->
+            <bean class="com.github.zhuyiyi1990.hwuanote.interceptor.MyInterceptor2"/>
+            <!--不要拦截的方法,上下只要配置一个即可-->
+            <!--<mvc:exclude-mapping path=""/>-->
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

@@ -173,4 +173,10 @@ public class UserController {
         return "success";
     }
 
+    @RequestMapping("/testInterceptor")
+    public String testInterceptor() {
+        System.out.println("执行testInterceptor");
+        return "success";
+    }
+
 }

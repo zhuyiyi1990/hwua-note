@@ -5,5 +5,6 @@
 </head>
 <body>
     ${errorMsg}
+    <%System.out.println("error.jsp执行了");%>
 </body>
 </html>

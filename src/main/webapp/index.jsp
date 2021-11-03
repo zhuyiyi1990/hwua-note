@@ -19,5 +19,8 @@
 <hr/>
 <h3>异常处理</h3>
 <a href="${pageContext.request.contextPath}/user/testException">异常处理</a>
+<hr/>
+<h3>拦截器</h3>
+<a href="${pageContext.request.contextPath}/user/testInterceptor">拦截器</a>
 </body>
 </html>
